@@ -1,18 +1,18 @@
 # Password Strength Analyzer
 
 ## Overview
-Password Strength Analyzer is a simple, interactive web app that evaluates your passwords in real-time, gives a strength score, and provides actionable suggestions to make your passwords more secure.
+Password Strength Analyzer is a desktop GUI app built with Python and Tkinter that evaluates the strength of your passwords in real-time and provides actionable suggestions to make them stronger.
 
 ## Features
-- Real-time password evaluation
-- Shows strength score and entropy
-- Suggests improvements for stronger passwords
-- Educates users about secure password practices
+- Real-time password strength evaluation
+- Shows strength score and estimated entropy
+- Suggests improvements (length, uppercase, lowercase, numbers, special characters)
+- Educates users about safe password practices
 
 ## Tech Stack
-- **Frontend & App:** Streamlit
-- **Backend Logic:** Python (regex, string analysis)
-- **Optional:** Integration with breach databases like Have I Been Pwned
+- Python
+- Tkinter (GUI)
+- Regex & Math for password analysis
 
 ## Installation
 1. Clone the repository:
@@ -21,9 +21,6 @@ Password Strength Analyzer is a simple, interactive web app that evaluates your 
    
 2. Navigate into the project directory:
    cd password-strength-analyzer
-   
-4. Install dependencies:
-   pip install -r requirements.txt
 
-5. Run the app:
-   streamlit run app.py
+3. Run the app:
+   python App.py
