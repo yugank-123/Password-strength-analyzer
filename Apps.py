@@ -1,4 +1,5 @@
-import streamlit as st
+import tkinter as tk
+from tkinter import messagebox
 import re
 import math
 
@@ -28,25 +29,24 @@ def calculate_strength(password):
     
     return strength, entropy
 
-# Streamlit UI
-st.title("🔒 Password Strength Analyzer")
-st.write("Check your password strength and get suggestions to improve it.")
-
-password = st.text_input("Enter your password", type="password")
-
-if password:
+# Function to handle password input and show results
+def analyze_password():
+    password = password_entry.get()
+    if not password:
+        messagebox.showwarning("Input Error", "Please enter a password.")
+        return
+    
     strength, entropy = calculate_strength(password)
     
     if strength <= 2:
-        st.error("Weak Password ❌")
+        result_label.config(text="Weak Password ❌", fg="red")
     elif strength <= 4:
-        st.warning("Moderate Password ⚠️")
+        result_label.config(text="Moderate Password ⚠️", fg="orange")
     else:
-        st.success("Strong Password ✅")
+        result_label.config(text="Strong Password ✅", fg="green")
     
-    st.info(f"Password Strength Score: {strength}/6 | Estimated Entropy: {entropy:.2f}")
+    score_label.config(text=f"Strength Score: {strength}/6 | Estimated Entropy: {entropy:.2f}")
     
-    # Suggestions
     suggestions = []
     if len(password) < 8:
         suggestions.append("Use at least 8 characters")
@@ -56,10 +56,30 @@ if password:
         suggestions.append("Include lowercase letters")
     if not re.search(r'\d', password):
         suggestions.append("Include numbers")
-    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+    if not re.search(r'[!@#$%^&*(),.?\":{}|<>]', password):
         suggestions.append("Include special characters")
     
-    if suggestions:
-        st.subheader("Suggestions to Improve Password:")
-        for s in suggestions:
-            st.write(f"- {s}")
+    suggestion_text = "\n".join(suggestions) if suggestions else "Your password is strong!"
+    suggestion_label.config(text=suggestion_text)
+
+# Tkinter GUI setup
+root = tk.Tk()
+root.title("Password Strength Analyzer")
+root.geometry("400x350")
+
+tk.Label(root, text="Enter your password:", font=("Arial", 12)).pack(pady=10)
+password_entry = tk.Entry(root, show="*", width=30)
+password_entry.pack(pady=5)
+
+tk.Button(root, text="Check Strength", command=analyze_password).pack(pady=10)
+
+result_label = tk.Label(root, text="", font=("Arial", 12, "bold"))
+result_label.pack(pady=5)
+
+score_label = tk.Label(root, text="", font=("Arial", 10))
+score_label.pack(pady=5)
+
+suggestion_label = tk.Label(root, text="", font=("Arial", 10), justify="left")
+suggestion_label.pack(pady=10)
+
+root.mainloop()
