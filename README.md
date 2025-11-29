@@ -17,7 +17,7 @@ Password Strength Analyzer is a simple, interactive web app that evaluates your 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/password-strength-analyzer.git
+   git clone https://github.com/yugank-123/Password-strength-analyzer.git
    
 2. Navigate into the project directory:
    cd password-strength-analyzer
