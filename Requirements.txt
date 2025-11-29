@@ -1,1 +1,3 @@
 streamlit==1.30.0
+# No external packages required for Tkinter version
+# Tkinter comes pre-installed with Python
